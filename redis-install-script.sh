@@ -69,11 +69,9 @@ sudo chkconfig --level 345 redis-server on
 sudo chkconfig --add redis-sentinel
 sudo chkconfig --level 345 redis-sentinel on
 echo "*****************************************"
-echo " 8. Start Redis Server and Redis Sentinel"
-echo "*****************************************"
-sudo service redis-server start
-sudo service redis-sentinel start
-echo "*****************************************"
 echo " Installation Complete!"
+echo " To start redis-server execute /etc/init.d/redis-server start"
+echo " To start redis-sentinel execute /etc/init.d/redis-sentinel start"
+echo ""
 read -p "Press [Enter] to continue..."
 
