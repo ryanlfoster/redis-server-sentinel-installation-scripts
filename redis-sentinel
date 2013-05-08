@@ -19,7 +19,7 @@
 # Check that networking is up.
 [ "$NETWORKING" = "no" ] && exit 0
 
-sentinel="/usr/local/bin/redis-server"
+sentinel="/usr/local/bin/redis-sentinel"
 prog=$(basename $sentinel)
 
 REDIS_SENTINEL_CONF_FILE="/etc/redis-sentinel/sentinel.conf"
@@ -30,7 +30,7 @@ start() {
     [ -x $sentinel ] || exit 5
     [ -f $REDIS_SENTINEL_CONF_FILE ] || exit 6
     echo -n $"Starting $prog: "
-    daemon $sentinel $REDIS_CONF_FILE --sentinel
+    exec 2>&1 $sentinel $REDIS_SENTINEL_CONF_FILE
     retval=$?
     echo
     [ $retval -eq 0 ] && touch $lockfile
