@@ -5,7 +5,7 @@ INSTALLATION
 ============
 
 1) Move the files into a folder
-2) sudo ./redis-install-script.sh
+2) sudo sh redis-install-script.sh
 
 =============
 CONFIGURATION
