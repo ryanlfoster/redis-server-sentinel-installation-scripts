@@ -30,7 +30,7 @@ start() {
     [ -x $sentinel ] || exit 5
     [ -f $REDIS_SENTINEL_CONF_FILE ] || exit 6
     echo -n $"Starting $prog: "
-    exec 2>&1 $sentinel $REDIS_SENTINEL_CONF_FILE
+    daemon $sentinel $REDIS_SENTINEL_CONF_FILE
     retval=$?
     echo
     [ $retval -eq 0 ] && touch $lockfile
