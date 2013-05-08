@@ -23,7 +23,7 @@
 redis="/usr/local/bin/redis-server"
 prog=$(basename $redis)
 
-REDIS_CONF_FILE="/etc/redis/redis.conf"
+REDIS_CONF_FILE="/etc/redis-server/redis.conf"
 
 [ -f /etc/sysconfig/redis ] && . /etc/sysconfig/redis
 

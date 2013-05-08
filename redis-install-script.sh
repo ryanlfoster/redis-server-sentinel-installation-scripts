@@ -25,9 +25,9 @@ sudo make install
 echo "*****************************************"
 echo " 3. Create Directories and Copy Redis Files"
 echo "*****************************************"
-sudo mkdir /etc/redis /etc/redis-sentinel /var/lib/redis
+sudo mkdir /etc/redis-server /etc/redis-sentinel /var/lib/redis
 sudo cp src/redis-server src/redis-cli src/redis-sentinel /usr/local/bin
-sudo cp redis.conf /etc/redis
+sudo cp redis.conf /etc/redis-server
 sudo cp sentinel.conf /etc/redis-sentinel
 echo "*****************************************"
 echo " 4. Configure Redis.Conf"
