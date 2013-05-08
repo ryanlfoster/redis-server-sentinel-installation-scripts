@@ -1,15 +1,14 @@
 Redis Server and Sentinel installation scripts - Redhat
 
-============
-INSTALLATION
-============
+Install
 
-1. Move the files into a folder
-2. sudo sh redis-install-script.sh
+sudo sh redis-install-script.sh
 
-=============
-CONFIGURATION
-=============
+Uninstall
+
+sudo sh redis-remove-script.sh
+
+Configuration
 
 Config files are stored in /etc/redis and can be edited to your needs.
 Don't forget to restart the redis server and redis sentinel:
