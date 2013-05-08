@@ -1,0 +1,48 @@
+#!/bin/sh
+# From - http://www.codingsteps.com/install-redis-2-6-on-amazon-ec2-linux-ami-or-centos/
+# 
+# redis - this script starts and stops the redis-sentinel daemon
+#
+# chkconfig:   - 85 15 
+# description:  Redis sentinel is a system designed to help managing Redis instances.
+# processname: redis-sentinel
+# config:      /etc/redis-sentinel/sentinel.conf
+# config:      /etc/sysconfig/sentinel.conf
+# pidfile:     /var/run/redis-sentinel.pid
+ 
+NAME=redis-sentinel
+BIN=/usr/local/bin/redis-sentinel
+SENTINEL_PID=/tmp/redis-sentinel.pid
+CMD=$1
+ 
+start() {
+        echo "Starting $NAME ..."
+        exec 2>&1 $BIN /etc/redis-sentinel/sentinel.conf | logger -t sentinel &
+        echo $! > "${SENTINEL_PID}";
+}
+ 
+stop() {
+        PID=`cat $SENTINEL_PID`
+        echo "Stopping $NAME ($PID) ..."
+        kill $PID
+}
+ 
+restart() {
+        echo "Restarting $NAME ..."
+        stop
+        start
+}
+ 
+case "$CMD" in
+        start)
+                start
+                ;;
+        stop)
+                stop
+                ;;
+        restart)
+                restart
+                ;;
+        *)
+                echo "Usage $0 {start|stop|restart}"
+esac
