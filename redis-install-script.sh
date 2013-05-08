@@ -1,13 +1,12 @@
 #!/bin/bash
-# From here: http://www.codingsteps.com/install-redis-2-6-on-amazon-ec2-linux-ami-or-centos/
-# Thanks to https://raw.github.com/gist/2776679/b4f5f5ff85bddfa9e07664de4e8ccf0e115e7b83/install-redis.sh
-# Uses redis-server init script from https://raw.github.com/saxenap/install-redis-amazon-linux-centos/master/redis-server
+# Based on https://github.com/saxenap/install-redis-amazon-linux-centos
+# From https://raw.github.com/nillis/redis-server-sentinel-installation-scripts/master/redis-install-script.sh
+# Uses redis-server init script from https://raw.github.com/nillis/redis-server-sentinel-installation-scripts/master/redis-server
+# Uses redis-sentinel init script from https://raw.github.com/nillis/redis-server-sentinel-installation-scripts/master/redis-sentinel
 ###############################################
 # To use: 
-# wget https://raw.github.com/saxenap/install-redis-amazon-linux-centos/master/redis-install-script.sh
-# chmod 777 redis-install-script.sh
-# ./redis-install-script.sh
-###############################################
+# git clone https://github.com/nillis/redis-server-sentinel-installation-scripts.git
+# sudo sh redis-install-script.sh
 echo "*****************************************"
 echo " 1. Prerequisites: Install updates, set time zones, install GCC and make"
 echo "*****************************************"
