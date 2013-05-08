@@ -43,6 +43,7 @@ sudo sed -e "s/^daemonize no$/daemonize yes/" -e "s/^# bind 127.0.0.1$/bind 127.
 echo "*****************************************"
 echo " 6. Move and Configure Redis-Server and Redis-Sentinel"
 echo "*****************************************"
+cd ..
 sudo cp redis-server /etc/init.d
 sudo cp redis-sentinel /etc/init.d
 sudo chmod 755 /etc/init.d/redis-server
