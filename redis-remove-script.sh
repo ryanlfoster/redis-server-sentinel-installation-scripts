@@ -7,8 +7,8 @@
 echo "*****************************************"
 echo " 1. Stop Redis Server and Redis Sentinel"
 echo "*****************************************"
-sudo service redis-server start
-sudo service redis-sentinel start
+sudo service redis-server stop
+sudo service redis-sentinel stop
 echo "*****************************************"
 echo " 2. Remove Auto-Enable Redis-Server and Redis-Sentinel"
 echo "*****************************************"
