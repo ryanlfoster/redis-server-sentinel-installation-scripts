@@ -24,7 +24,7 @@ sudo make install
 echo "*****************************************"
 echo " 3. Create Directories and Copy Redis Files"
 echo "*****************************************"
-sudo mkdir /etc/redis-server /etc/redis-sentinel /var/lib/redis
+sudo mkdir /etc/redis-server /etc/redis-sentinel /var/lib/redis-server /var/lib/redis-sentinel
 sudo cp src/redis-server src/redis-cli src/redis-sentinel /usr/local/bin
 sudo cp redis.conf /etc/redis-server
 sudo cp sentinel.conf /etc/redis-sentinel
@@ -34,11 +34,22 @@ echo "*****************************************"
 echo " Edit redis.conf as follows:"
 echo " 1: ... daemonize yes"
 echo " 2: ... bind 127.0.0.1"
-echo " 3: ... dir /var/lib/redis"
+echo " 3: ... dir /var/lib/redis-server"
 echo " 4: ... loglevel notice"
-echo " 5: ... logfile /var/log/redis.log"
+echo " 5: ... logfile /var/log/redis-server.log"
 echo "*****************************************"
-sudo sed -e "s/^daemonize no$/daemonize yes/" -e "s/^# bind 127.0.0.1$/bind 127.0.0.1/" -e "s/^dir \.\//dir \/var\/lib\/redis\//" -e "s/^loglevel verbose$/loglevel notice/" -e "s/^logfile stdout$/logfile \/var\/log\/redis.log/" redis.conf > /etc/redis/redis.conf
+sudo sed -e "s/^daemonize no$/daemonize yes/" -e "s/^# bind 127.0.0.1$/bind 127.0.0.1/" -e "s/^dir \.\//dir \/var\/lib\/redis-server\//" -e "s/^loglevel verbose$/loglevel notice/" -e "s/^logfile stdout$/logfile \/var\/log\/redis-server.log/" redis.conf > /etc/redis-server/redis.conf
+echo "*****************************************"
+echo " 5. Configure Sentinel.Conf"
+echo "*****************************************"
+echo " Edit sentinel.conf as follows:"
+echo " 1: ... daemonize yes"
+echo " 2: ... bind 127.0.0.1"
+echo " 3: ... dir /var/lib/redis-sentinel"
+echo " 4: ... loglevel notice"
+echo " 5: ... logfile /var/log/redis-sentinel.log"
+echo "*****************************************"
+sudo sed -e "s/^daemonize no$/daemonize yes/" -e "s/^dir \.\//dir \/var\/lib\/redis-sentinel\//" -e "s/^loglevel verbose$/loglevel notice/" -e "s/^logfile stdout$/logfile \/var\/log\/redis-sentinel.log/" sentinel.conf > /etc/redis-sentinel/sentinel.conf
 echo "*****************************************"
 echo " 6. Move and Configure Redis-Server and Redis-Sentinel"
 echo "*****************************************"
