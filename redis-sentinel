@@ -10,30 +10,52 @@
 # config:      /etc/sysconfig/sentinel.conf
 # pidfile:     /var/run/redis-sentinel.pid
  
-NAME=redis-sentinel
-BIN=/usr/local/bin/redis-sentinel
-SENTINEL_PID=/tmp/redis-sentinel.pid
-CMD=$1
+# Source function library.
+. /etc/rc.d/init.d/functions
+
+# Source networking configuration.
+. /etc/sysconfig/network
+
+# Check that networking is up.
+[ "$NETWORKING" = "no" ] && exit 0
+
+sentinel="/usr/local/bin/redis-sentinel"
+prog=$(basename $sentinel)
+
+REDIS_SENTINEL_CONF_FILE="/etc/redis-sentinel/sentinel.conf"
+
+lockfile=/var/lock/subsys/redis-sentinel
  
 start() {
-        echo "Starting $NAME ..."
-        exec 2>&1 $BIN /etc/redis-sentinel/sentinel.conf | logger -t sentinel &
-        echo $! > "${SENTINEL_PID}";
+    [ -x $sentinel ] || exit 5
+    [ -f $REDIS_SENTINEL_CONF_FILE ] || exit 6
+    echo -n $"Starting $prog: "
+    daemon $sentinel $REDIS_CONF_FILE
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && touch $lockfile
+    return $retval
+    echo -n $"$prog started succesfully "
 }
  
 stop() {
-        PID=`cat $SENTINEL_PID`
-        echo "Stopping $NAME ($PID) ..."
-        kill $PID
+    echo -n $"Stopping $prog: "
+    killproc $prog -QUIT
+    retval=$?
+    echo
+    [ $retval -eq 0 ] && rm -f $lockfile
+    return $retval
+    echo -n $"$prog stopped succesfully "
 }
  
 restart() {
-        echo "Restarting $NAME ..."
+        echo -n "Restarting $prog ..."
         stop
         start
+        echo -n $"$prog restarted succesfully "
 }
  
-case "$CMD" in
+case "$1" in
         start)
                 start
                 ;;
@@ -45,4 +67,5 @@ case "$CMD" in
                 ;;
         *)
                 echo "Usage $0 {start|stop|restart}"
+                exit 2
 esac

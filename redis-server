@@ -38,6 +38,7 @@ start() {
     echo
     [ $retval -eq 0 ] && touch $lockfile
     return $retval
+    echo -n $"$prog started succesfully "
 }
 
 stop() {
@@ -47,15 +48,18 @@ stop() {
     echo
     [ $retval -eq 0 ] && rm -f $lockfile
     return $retval
+    echo -n $"$prog stopped succesfully "
 }
 
 restart() {
+    echo -n "Restarting $prog ..."
     stop
     start
+    echo -n $"$prog restarted succesfully "
 }
 
 reload() {
-    echo -n $"Reloading $prog: "
+    echo -n "Restarting $prog ..."
     killproc $redis -HUP
     RETVAL=$?
     echo
