@@ -15,10 +15,10 @@ sudo yum -y install gcc gcc-c++ make
 echo "*****************************************"
 echo " 2. Download, Untar and Make Redis 2.6.13"
 echo "*****************************************"
-sudo wget http://redis.googlecode.com/files/redis-2.6.13.tar.gz
-sudo tar xzf redis-2.6.13.tar.gz
-sudo rm redis-2.6.13.tar.gz -f
-cd redis-2.6.13
+sudo wget http://download.redis.io/releases/redis-2.8.1.tar.gz
+sudo tar xzf redis-2.8.1.tar.gz
+sudo rm redis-2.8.1.tar.gz -f
+cd redis-2.8.1
 sudo make
 sudo make install
 echo "*****************************************"
