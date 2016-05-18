@@ -13,12 +13,12 @@ echo "*****************************************"
 sudo yum -y update
 sudo yum -y install gcc gcc-c++ make 
 echo "*****************************************"
-echo " 2. Download, Untar and Make Redis 2.6.13"
+echo " 2. Download, Untar and Make Redis Latest Stable Release"
 echo "*****************************************"
-sudo wget http://redis.googlecode.com/files/redis-2.6.13.tar.gz
-sudo tar xzf redis-2.6.13.tar.gz
-sudo rm redis-2.6.13.tar.gz -f
-cd redis-2.6.13
+sudo wget http://download.redis.io/redis-stable.tar.gz
+sudo tar xzf redis-stable.tar.gz
+sudo rm redis-stable.tar.gz -f
+cd redis-stable
 sudo make
 sudo make install
 echo "*****************************************"
